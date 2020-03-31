@@ -12,7 +12,7 @@ Sampling.CV1 <- function(gids,ngids=NULL,f=NULL,seed=NULL,rep=NULL){
   n <- f*ngids
   set1 <- matrix(NA,nrow=n,ncol=rep)
   set.seed(seed)
-  for(s in 1:rep) set1[,s] <- sort(unique(gids)[sample(1:GIDS, size = n , replace = FALSE)])
+  for(s in 1:rep) set1[,s] <- sort(unique(gids)[sample(1:ngids, size = n , replace = FALSE)])
   return(set1)
 }
 
