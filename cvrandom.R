@@ -26,3 +26,26 @@ Sampling.CV2 <- function(f,Y,seed=NULL,rep=NULL){
   for(s in 1:rep) set1[,s] <- sort(sample(1:n, size = n*f , replace = FALSE));set.seed(seed+s)
   return(set1)
 }
+
+Sampling.CV0 <- function(gids,envs,ngids,f,out.env,seed,rep){
+  envs <- as.factor(envs)
+  (env<-levels(envs))
+  (gid <- levels(gids))
+  
+  set.seed(seed)
+  out<-list()
+  for(s in 1:rep){
+    (trai.env <- env[sample(1:length(env),size = length(env)-out.env,replace = F)])
+    (trai.gid <- gid[Sampling.CV1(gids = gids,ngids = ngids,f = f,seed = seed,rep = 1)])
+    
+    (newG      <-which(!gids %in% trai.gid))
+    (newE      <-which(!envs %in% trai.env))
+    newGE      <-which(!envs %in% trai.env & !gids %in% trai.gid)
+    training   <-which(envs %in% trai.env & gids %in% trai.gid)
+    
+    out[[s]]<-list(newG=newG,newE=newE,newGE=newGE,training=training)
+    set.seed(seed+1)
+  }
+  names(out) <- paste0('Rep',1:rep)
+  return(out)
+}
