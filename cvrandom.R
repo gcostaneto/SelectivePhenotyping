@@ -1,7 +1,9 @@
-CV.random <- function(gids,ngids,f.train=.7, df, rep=20, seed=NULL){
+CV.random <- function(gids,ngids,envs=NULL,f.train=.7, df, rep=20, seed=NULL,out.env=NULL){
   CV1<-Sampling.CV1(gids = gids,ngids = ngids,f = f.train,seed = seed,rep = rep)
   CV2<-Sampling.CV2(f = f.train,Y = df,seed = seed,rep = rep)
-  return(list(CV1=CV1,CV2=CV2))
+  if(is.null(out.env)) out.env <- 1  # one-environment-out per fold
+  CV0<-Sampling.CV0(gids=gids,envs=envs,f=f.train,rep=rep,seed=seed,out.env=out.env)
+  return(list(CV1=CV1,CV2=CV2,CV0=CV0))
 }
 
 Sampling.CV1 <- function(gids,ngids=NULL,f=NULL,seed=NULL,rep=NULL){
