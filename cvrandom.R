@@ -28,17 +28,17 @@ Sampling.CV2 <-function(f,Y,seed=NULL,rep=NULL){
   for(s in 1:rep) set1[[s]] <- sort(sample(1:n, size = n*f , replace = FALSE));set.seed(seed+s)
   return(set1)
 }
+
 Sampling.CV0 <- function (gids, envs, ngids, f, out.env, seed, rep) 
 {
   envs <- as.factor(envs)
   gids <- as.factor(gids)
   (env <- levels(envs))
   (gid <- levels(gids))
-  set.seed(seed)
-  cida <- seed
+
   out <- list()
   for (s in 1:rep) {
-    set.seed(cida)
+     set.seed(seed)
     (trai.env <- env[sample(1:length(env), size = length(env) - 
                               out.env, replace = F)])
     cida<-cida+1
@@ -53,6 +53,7 @@ Sampling.CV0 <- function (gids, envs, ngids, f, out.env, seed, rep)
     training <- which(envs %in% trai.env & gids %in% trai.gid)
     out[[s]] <- list(newG = newG, newE = newE, newGE = newGE, 
                      training = training)
+    seed <- seed+s
   }
   names(out) <- paste0("Rep", 1:rep)
   return(out)
