@@ -41,7 +41,6 @@ Sampling.CV0 <- function (gids, envs, ngids, f, out.env, seed, rep)
      set.seed(seed)
     (trai.env <- env[sample(1:length(env), size = length(env) - 
                               out.env, replace = F)])
-    cida<-cida+1
     cat('training environments \n')
     cat(paste0(trai.env,'\n'))
     (trai.gid <- gid[Sampling.CV1(gids = gids, ngids = ngids, 
