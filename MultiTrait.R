@@ -81,7 +81,7 @@ CV_sparse_MET_trait = function(gids=NULL,envs=NULL,traits,ngids=NULL,ntraits=NUL
     out = setList
     names(out) = traitsT
     output[[j]] = out
-    seed = seed*sqrt(j+1)*pi
+    seed = seed*sqrt(j+1)
   }
   
   return(output)
