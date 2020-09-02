@@ -81,7 +81,7 @@ CV_sparse_MET_trait = function(gids=NULL,envs=NULL,traits,ngids=NULL,ntraits=NUL
     out = setList
     names(out) = traitsT
     output[[j]] = out
-    seed = seed*sqrt(j+1)
+    seed = seed+j*2
   }
   
   return(output)
@@ -95,7 +95,7 @@ CV_sparse_MET_trait = function(gids=NULL,envs=NULL,traits,ngids=NULL,ntraits=NUL
 # TRset   = a output from the previous functions
 
 Pos_NA_ordering = function(Ytraits,TRset){
-  nT = names(Ytraits)
+  nT = colnames(Ytraits)
   for(j in 1:length(nT)){
       index = which(names(TRset) %in% nT[j])
       Ytraits[-TRset[[index]] , j] = NA
