@@ -34,3 +34,6 @@ summary.selection = function(.y,
               gain.y = gain.sel, gain.yhat = gain.sel2,
               cs=cs))
 }
+
+
+mse = function(.yhat,.y) return(sum(((.yhat - .y)^2))/length(.y))
