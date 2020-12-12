@@ -1,6 +1,7 @@
 CV_sparse_MET = function(.pheno=NULL,f=.10,gids=NULL,envs=NULL,ngids=NULL,nenvs=NULL,rep=10,seed=9812981){
   
   library(plyr)
+  library(reshape2)
   
   if(is.null(ngids))      ngids  = nlevels(gids)
   if(is.null(nenvs))      nenvs  = nlevels(envs)
