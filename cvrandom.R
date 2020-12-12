@@ -29,12 +29,13 @@ Sampling.CV2 <-function(f,Y,seed=NULL,rep=NULL){
   return(set1)
 }
 
-Sampling.CV0 <- function (gids, envs, ngids, f, out.env, seed, rep) 
+Sampling.CV0 <- function (gids, envs, f, out.env, seed, rep) 
 {
   envs <- as.factor(envs)
   gids <- as.factor(gids)
   (env <- levels(envs))
   (gid <- levels(gids))
+  ngids <- length(gid)
 
   out <- list()
   for (s in 1:rep) {
